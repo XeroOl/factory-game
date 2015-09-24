@@ -29,5 +29,10 @@ public class WorldScene extends Scene{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void hover(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

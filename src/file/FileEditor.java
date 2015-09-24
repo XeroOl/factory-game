@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class FileEditor {
+public class FileEditor{
+	public static FileEditor options = new FileEditor("options.txt");
 	String filename;
 	String[] dataNames;
 	String[] dataValues;
@@ -33,6 +34,12 @@ public class FileEditor {
 	}
 
 	public void writeVariable(String name, String d) {
+		for (int i = 0; i < dataNames.length; i++) {
+			if (dataNames[i] == name) {
+				dataValues[i]=d;
+				return;
+			}
+		}
 	}
 
 	public String readOption(String name) {
@@ -47,10 +54,11 @@ public class FileEditor {
 
 	public void save() {
 	}
-	public String toString(){
+
+	public String toString() {
 		String s = filename + " :\n";
-		for(int i = 0; i< dataNames.length;i++){
-			s+=dataNames[i]+" = "+dataValues[i]+"\n";
+		for (int i = 0; i < dataNames.length; i++) {
+			s += dataNames[i] + " = " + dataValues[i] + "\n";
 		}
 		return s;
 	}

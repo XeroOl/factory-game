@@ -12,6 +12,7 @@ import java.awt.image.BufferStrategy;
 public class GameScreen extends Canvas {
 	private static final long serialVersionUID = -4065831316512810103L;
 	BufferStrategy m;
+	public static GameScreen gs = new GameScreen();
 
 	public GameScreen() {
 	}

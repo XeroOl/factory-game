@@ -8,11 +8,16 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public abstract class Scene implements MouseListener, MouseMotionListener,
-		MouseWheelListener {
+import javax.swing.event.MouseInputListener;
+
+import main.Console;
+
+public abstract class Scene implements MouseWheelListener, MouseInputListener {
 	protected ArrayList<Layer> layers = new ArrayList<Layer>();
 	public GameScreen myScreen;
+	long timeSinceMoved = System.currentTimeMillis();
 
 	public abstract void leftClick(int x, int y);
 
@@ -22,10 +27,11 @@ public abstract class Scene implements MouseListener, MouseMotionListener,
 
 	public abstract void scroll(int wheelRotation, int x, int y);
 
+	public abstract void hover(int x, int y);
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -48,8 +54,6 @@ public abstract class Scene implements MouseListener, MouseMotionListener,
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

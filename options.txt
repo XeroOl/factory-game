@@ -1,5 +1,5 @@
-            res         =                    1920x1080
-    difficulty=		EASY
-sensitivity    =90.54
+res=1920x1080
+difficulty=EASY
+sensitivity=90.54
 touch-screen-mode=false
 key.jump=VK_SPACE

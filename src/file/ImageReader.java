@@ -13,7 +13,7 @@ public class ImageReader {
 	 try {
 		return ImageIO.read(new File(path));
 	} catch (IOException e) {
-		Console.console.print("cannot find image: "+path.substring(path.lastIndexOf('/')+1,path.length()), Console.WARN);
+		Console.console.warn("cannot find image: "+path.substring(path.lastIndexOf('/')+1,path.length()));
 		try {
 			return ImageIO.read(new File("assets/misc/missing.png"));
 		} catch (IOException e1) {
