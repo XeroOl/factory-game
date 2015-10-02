@@ -21,7 +21,7 @@ public class Button extends GuiElement {
 	}
 
 	public void click() {
-		System.out.println(myText);
+		//System.out.println(myText);
 	}
 
 	public void drawImage(Graphics g) {
@@ -33,16 +33,5 @@ public class Button extends GuiElement {
 		// override this method when you declare the button variable
 	}
 
-	public int toggle(String... texts) {
-		int i = 0;
-		for (; i < texts.length; i++) {
-			if (texts[i] == myText) {
-				i = (i + 1) % texts.length;
-				myText = texts[i];
-				return i;
-			}
-		}
-		myText = texts[0];
-		return 0;
-	}
+
 }

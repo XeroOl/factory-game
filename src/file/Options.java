@@ -2,15 +2,19 @@ package file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 
-public class FileEditor{
-	public static FileEditor options = new FileEditor("options.txt");
+import main.Console;
+
+public class Options{
+	public static Options options = new Options("options.txt");
 	String filename;
 	String[] dataNames;
 	String[] dataValues;
 
-	public FileEditor(String filename) {
+	public Options(String filename) {
 		this.filename = filename;
 		try {
 			Scanner s = new Scanner(new File(filename));
@@ -35,11 +39,13 @@ public class FileEditor{
 
 	public void writeVariable(String name, String d) {
 		for (int i = 0; i < dataNames.length; i++) {
-			if (dataNames[i] == name) {
+			if (dataNames[i].equals(name)) {
 				dataValues[i]=d;
+				save();
 				return;
 			}
 		}
+		Console.console.warn("Cannot write value "+d+" to "+name+". Cannot find \""+name+"\" in file "+filename+".");
 	}
 
 	public String readOption(String name) {
@@ -53,10 +59,21 @@ public class FileEditor{
 	}
 
 	public void save() {
+		try {
+			PrintWriter writer = new PrintWriter(filename, "UTF-8");
+			writer.print(this.toString());
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String toString() {
-		String s = filename + " :\n";
+		String s = "";
 		for (int i = 0; i < dataNames.length; i++) {
 			s += dataNames[i] + " = " + dataValues[i] + "\n";
 		}

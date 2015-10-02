@@ -3,22 +3,23 @@ package main;
 import menu.MenuScene;
 import render.GameScreen;
 import render.Scene;
-import file.FileEditor;
+import file.Options;
 
 public class GameManager {
 	public static GameManager gm = new GameManager();
-	GameScreen myGameScreen = new GameScreen();
+	GameScreen myGameScreen = GameScreen.gs;
 	boolean keepRunning = true;
 	Console console = new Console(System.out, Console.DEBUG);
-	Scene s = new MenuScene();
+	public Scene s = new MenuScene();
 
 	public void printOptions() {
-		System.out.println(FileEditor.options);
+		System.out.println(Options.options);
 	}
 
 	public void start() {
 		myGameScreen.addMouseListener(s);
 		myGameScreen.addMouseMotionListener(s);
 		myGameScreen.addMouseWheelListener(s);
+		myGameScreen.render();
 	}
 }

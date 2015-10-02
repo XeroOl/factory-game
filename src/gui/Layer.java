@@ -18,6 +18,7 @@ public class Layer extends ArrayList<DrawableObject> {
 		add(contents);
 	}
 
+
 	/**
 	 * 
 	 */
