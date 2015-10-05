@@ -35,6 +35,9 @@ public class StringParser {
 		} catch (IndexOutOfBoundsException e) {
 			return "";
 		}
+	}
 
+	public static String getName(String string) {
+		return string.substring(0, string.indexOf(":"));
 	}
 }
