@@ -10,7 +10,6 @@ public class GameManager {
 	public static GameManager gm = new GameManager();
 	GameScreen myGameScreen = GameScreen.gs;
 	boolean keepRunning = true;
-	Console console = new Console(System.out, Console.DEBUG);
 	public Scene s = new MenuScene();
 
 	public void printOptions() {
@@ -22,7 +21,6 @@ public class GameManager {
 		myGameScreen.addMouseMotionListener(s);
 		myGameScreen.addMouseWheelListener(s);
 		myGameScreen.render();
-		Item i = Item.fromString("Bag:{<INVENTORY CODE>}");
-		((world.item.ItemOne)i).shout();
+		Item i = Item.fromString("ItemOne:{data1,data2,data3}");
 	}
 }

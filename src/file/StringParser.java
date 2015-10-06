@@ -3,6 +3,8 @@ package file;
 import java.util.ArrayList;
 
 public class StringParser {
+	public static String[] split(String string){return split(string,',','{','}');}
+	
 	public static String[] split(String string, char regex, char commentStart,
 			char commentEnd) {
 		ArrayList<String> a = new ArrayList<String>();
