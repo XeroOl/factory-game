@@ -3,7 +3,9 @@ package main;
 import menu.MenuScene;
 import render.GameScreen;
 import render.Scene;
+import world.Data;
 import world.item.Item;
+import world.item.ItemOne;
 import file.Options;
 
 public class GameManager {
@@ -21,6 +23,5 @@ public class GameManager {
 		myGameScreen.addMouseMotionListener(s);
 		myGameScreen.addMouseWheelListener(s);
 		myGameScreen.render();
-		Item i = Item.fromString("ItemOne:{data1,data2,data3}");
 	}
 }

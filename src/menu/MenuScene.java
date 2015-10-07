@@ -2,15 +2,14 @@ package menu;
 
 import gui.Button;
 import gui.Layer;
+
+import java.util.ArrayList;
+
 import render.DrawableObject;
 import render.Scene;
 
 public class MenuScene extends Scene {
-
-
-	
 	public MenuScene() {
-
 	}
 
 	@Override

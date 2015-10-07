@@ -16,31 +16,41 @@ public class Console {
 		myStream = p;
 		this.level = level;
 	}
-
+	public void debug(Object o) {
+		debug(o.toString());
+	}
 	public void debug(String message) {
 		if (level > DEBUG)
 			return;
 		myStream.println("[DEBUG] " + message);
 	}
-
+	public void info(Object o) {
+		info(o.toString());
+	}
 	public void info(String message) {
 		if (level > INFO)
 			return;
 		myStream.println("[INFO] " + message);
 	}
-
+	public void warn(Object o) {
+		warn(o.toString());
+	}
 	public void warn(String message) {
 		if (level > WARN)
 			return;
 		myStream.println("[INFO] " + message);
 	}
-
+	public void error(Object o) {
+		error(o.toString());
+	}
 	public void error(String message) {
 		if (level > ERROR)
 			return;
 		myStream.println("[!!ERROR!!] " + message);
 	}
-
+	public void fatal(Object o) {
+		fatal(o.toString());
+	}
 	public void fatal(String message) {
 		if (level > FATAL)
 			return;

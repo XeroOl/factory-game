@@ -5,12 +5,15 @@ import world.Data;
 
 public class ItemOne extends Item {
 	String s;
-public ItemOne(String... d){
-	for(int i = 0; i < d.length; i++){
-		Console.console.debug(d[i]);
+	Data[] values;
+
+	public ItemOne(Data... d) {
+		super(d[0].toInt());
 	}
-}
-public void shout(){
-	Console.console.info(s);
-}
+
+
+	@Override
+	public int getMaxCount() {
+		return 50;
+	}
 }

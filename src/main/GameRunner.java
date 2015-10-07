@@ -3,6 +3,8 @@ package main;
 import javax.swing.JFrame;
 
 import render.GameScreen;
+import world.Data;
+import world.item.Item;
 import file.Options;
 
 public class GameRunner {
@@ -17,7 +19,12 @@ public class GameRunner {
 		myJFrame.setTitle("My Game");
 		myJFrame.add(GameScreen.gs);
 		GameManager.gm.start();// STARTING WILL STEAL YOUR THREAD
-
+		Data itemdata = new Data("world.item.ItemOne:{5,world.item.ItemOne:{5,g,hgeh},hgeh}");
+		Item i = itemdata.toType(Item.class);
+		Item i2 = itemdata.getMetaData()[1].toType(Item.class);
+		Data doubledata = new Data("254.524");
+		double d = doubledata.toDouble();
+		
 	}
 	// break, place, interact
 
