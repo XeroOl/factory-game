@@ -15,7 +15,7 @@ import javax.swing.event.MouseInputListener;
 import main.Console;
 
 public abstract class Scene implements MouseWheelListener, MouseInputListener {
-	protected ArrayList<Layer> layers = new ArrayList<Layer>();
+	public ArrayList<Layer> layers = new ArrayList<Layer>();
 	public GameScreen myScreen;
 	long timeSinceMoved = System.currentTimeMillis();
 

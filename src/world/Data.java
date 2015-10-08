@@ -1,30 +1,52 @@
 package world;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 import main.Console;
 
 public class Data {
-	String myValue;
+	String myString;
+	String name;
+	DataArray metaData;
+	Class<?> myClass;
 
 	public Data(String s) {
-		myValue = s;
+		myString = s;
+		name = readName();
+		metaData = readMetaData();
+		myClass = readClassName();
 	}
 
 	public int toInt() {
-		return Integer.parseInt(myValue);
+		return Integer.parseInt(myString);
+	}
+
+	public boolean isInt() {
+		try {
+			Integer.parseInt(myString);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	public double toDouble() {
-		return Double.parseDouble(myValue);
+		return Double.parseDouble(myString);
+	}
+
+	private boolean isDouble() {
+		try {
+			Double.parseDouble(myString);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	public <T> T toType(Class<T> dataType) {
 		try {
-			return dataType.cast(Class.forName(getName())
-					.getConstructor(Data[].class)
-					.newInstance((Object) getMetaData()));
+			return dataType.cast(myClass.getConstructor(DataArray.class)
+					.newInstance(metaData));
 		} catch (ClassCastException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,16 +60,13 @@ public class Data {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			Console.console.error("Class " + getName()
-					+ " does not contain the constructor " + getName()
-					+ "(Data...)");
+			Console.console
+					.error("Class " + name
+							+ " does not contain the constructor " + name
+							+ "(Data...)");
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			Console.console.error("Cannot find class file " + getName()
-					+ ".class");
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
@@ -57,47 +76,59 @@ public class Data {
 	}
 
 	public String toString() {
-		return myValue;
+		return myString;
 	}
 
-	public Data[] getMetaData() {
+	public DataArray readMetaData() {
 		try {
-			String meta = myValue.split(":", 2)[1].substring(1,
-					myValue.length() - myValue.indexOf(":") - 2);
-			ArrayList<Data> a = new ArrayList<Data>();
-			int nestLevel = 0;
-			int lastLoc = 0;
-			boolean inComment = false;
-			boolean inQuotes = false;
-			for (int i = 0; i < meta.length(); i++) {
-				char currentChar = meta.charAt(i);
-				if (currentChar == '"') {
-					inQuotes=!inQuotes;
-				}
-				if (!inQuotes) {
-					if (currentChar == '{') {
-						nestLevel++;
-						inComment = true;
-					} else if (inComment) {
-						if (currentChar == '}') {
-							inComment = --nestLevel != 0;
-						}
-					} else if (currentChar == ',') {
-						a.add(new Data(meta.substring(lastLoc, i)));
-						lastLoc = i + 1;
-					}
-				}
-			}
-			a.add(new Data(meta.substring(lastLoc, meta.length())));
-			return a.toArray(new Data[a.size()]);
+			String metaDataString = myString.split(":", 2)[1].substring(1,
+					myString.length() - myString.indexOf(":") - 2);
+
+			return new DataArray(metaDataString);
 		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+
+	}
+
+	public String readName() {
+		int i;
+		try {
+			return (myString.charAt(0) != '"' && (i = myString.indexOf(':')) != -1) ? myString
+					.substring(0, i) : null;
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
 
 	public String getName() {
-		int i;
-		return (myValue.charAt(0) != '"' && (i = myValue.indexOf(':')) != -1) ? myValue
-				.substring(0, i) : null;
+		return name;
 	}
+
+	public DataArray getMetaData() {
+		return metaData;
+	}
+
+	public Class getClassType() {
+		return myClass;
+	}
+
+	public Class readClassName() {
+		if (name != null) {
+			if (isInt()) {
+				return int.class;
+			}
+			if (isDouble()) {
+				return double.class;
+			}
+			try {
+				return Class.forName(name);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 }

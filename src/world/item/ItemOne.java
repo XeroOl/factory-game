@@ -1,14 +1,16 @@
 package world.item;
 
-import main.Console;
 import world.Data;
+import world.DataArray;
 
 public class ItemOne extends Item {
 	String s;
 	Data[] values;
 
-	public ItemOne(Data... d) {
-		super(d[0].toInt());
+	public ItemOne(DataArray d) {
+		if(d.verify(null,ItemOne.class,null)){
+			System.out.println("hi");
+		}
 	}
 
 

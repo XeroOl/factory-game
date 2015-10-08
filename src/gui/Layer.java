@@ -13,7 +13,7 @@ public class Layer extends ArrayList<DrawableObject> {
 
 	public Layer() {
 	}
-
+	
 	public Layer(DrawableObject... contents) {
 		add(contents);
 	}
